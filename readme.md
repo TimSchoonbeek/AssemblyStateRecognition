@@ -28,6 +28,7 @@ File overview:
 
 
 Set-up:
+
 0. Install the public IndustReal dataset: https://github.com/TimSchoonbeek/IndustReal following
    the instructions and directory structure provided
 1. Install required packages: pip install -r requirements.txt
@@ -42,6 +43,7 @@ Set-up:
 
 
 Reproducing results:
+
 0. Run train.py, pointing to the directory where the IndustReal data is stored. The default 
    configuration consists of the hyperparameters as used for the experiments reported.
 1. Run test.py to test the performance on Industreal Test and the additional synthetic 
