@@ -26,16 +26,35 @@ Steps and code to reproduce the work "Supervised Representation Learning Approac
 - train.sh contains the code to execute 5 cycles with different seeds for a given setting. The
   default settings are for the best-performing model: SupCon with ISIL for the ViT-S model.
 
+## Data set-up
+To get the data for testing on erroneous states, download the testdata.zip file via the
+[project page](https://timschoonbeek.github.io/state_rec). Unzip and point to this directory in the 
+provided .sh scripts to evaluate tests.
+
+To get the training and test data on non-erroneous samples:
+
+0. Install the public [IndustReal dataset](https://timschoonbeek.github.io/industreal) following
+   the instructions and directory structure provided. This option provides you with all IndustReal
+   data, but requires some further processing if you want the representation learning framework 
+   to function out-of-the-box.
+1. Create train/val/test directories with an images directory and labels.json file, where all
+   train/val/test images are present. Provide unique names to the images and use the original
+   bounding box detections to create a new labels.json, containing these new names. If desired,
+   you can modify the dataloaders yourself to circumvent this step.
+
+Please note that we are working on a script to provide that automatically performs this step, to make
+it easier to get starting with the repo.
+
 
 ## Set-up:
 
 0. Install the public [IndustReal dataset](https://timschoonbeek.github.io/industreal) following
    the instructions and directory structure provided
-1. Install required packages: pip install -r requirements.txt
-2. To use pre-trained weights, download safetensors files from HuggingFace 
+0. Install required packages: pip install -r requirements.txt
+1. To use pre-trained weights, download safetensors files from HuggingFace 
    and place them in ./models dir. The results reported in the paper use the weights 
    "resnet34.a1_in1k" and "vit_small_patch16_224.augreg_in21k_ft_in1k"
-3. Optional: use error_labels.json (the new labels published together with the manuscript) to
+2. Optional: use error_labels.json (the new labels published together with the manuscript) to
    create the IndustReal error images subset. The image names contain all required information:
    the IndustReal recording and frame name of each image, the error category, the user-intended 
    state, the bounding box, and whether the assembly state is not occluded (indicated with binary
