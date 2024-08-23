@@ -1,8 +1,8 @@
-Steps and code to reproduce the work "Supervised Representation Learning Approach towards 
-Generalizable Assembly State Recognition"
+Steps and code to reproduce the work "Supervised Representation Learning Approach towards Generalizable Assembly State Recognition"
 
+## Check out the [project page](https://timschoonbeek.github.io/state_rec)
 
-File overview: 
+## File overview: 
 - train.py contains the script required to perform training with the representation learning 
   framework.
 - test.py evaluates the performance of a trained model on the IndustReal test set and the 
@@ -27,9 +27,9 @@ File overview:
   default settings are for the best-performing model: SupCon with ISIL for the ViT-S model.
 
 
-Set-up:
+## Set-up:
 
-0. Install the public IndustReal dataset: https://github.com/TimSchoonbeek/IndustReal following
+0. Install the public [IndustReal dataset](https://timschoonbeek.github.io/industreal) following
    the instructions and directory structure provided
 1. Install required packages: pip install -r requirements.txt
 2. To use pre-trained weights, download safetensors files from HuggingFace 
@@ -42,7 +42,7 @@ Set-up:
    label 'clean').
 
 
-Reproducing results:
+## Reproducing results:
 
 0. Run train.py, pointing to the directory where the IndustReal data is stored. The default 
    configuration consists of the hyperparameters as used for the experiments reported.
