@@ -27,34 +27,43 @@ Steps and code to reproduce the work "Supervised Representation Learning Approac
   default settings are for the best-performing model: SupCon with ISIL for the ViT-S model.
 
 ## Data set-up
-To get the data for testing on erroneous states, download the testdata.zip file via the
-[project page](https://timschoonbeek.github.io/state_rec). Unzip and point to this directory in the 
-provided .sh scripts to evaluate tests.
+The easiest method to set up the data correctly is to download all files from the data repository
+connected to the publication. You can find this on the [project page](https://timschoonbeek.github.io/state_rec)
+or directly at the [host](https://doi.org/10.4121/611adbc7-7935-43a6-8c3f-b2260a508e73).
+To use the data, simply unpack the two .zip files. The file assembly_states.zip contains all correct
+and intermediate (undefined) assembly states, including the state labels, unless undefined. 
+The assembly_states_errors.zip file contains the assembly state images containing errors, and 
+a file containing the annotations. Specifically, the annotations are in .json format, and for both
+.zip files they contain:
+- "images": all image names,
+- "labels": the assembly state labels as defined in IndustReal,
+- "bbox": bounding box coordinates as defined in IndustReal,
+- "split": indicates which dataset split (train/val/test) the image originates from,
 
-To get the training and test data on non-erroneous samples:
+Additionally, the annotations in assembly_states_errors.zip contain our new labels:
+- "clean": a Boolean indicating whether the frame demonstrates the entire assembly state,
+- "intended": the user-inteded assembly state (without the errors) as defined in IndustReal,
+- "error_cat": the error category as defined in our paper. Importantly, we define: 1. Missing
+  component, 2. Incorrect component placement, 3. Incorrect component orientation, 4. Part-level error.
 
-0. Install the public [IndustReal dataset](https://timschoonbeek.github.io/industreal) following
-   the instructions and directory structure provided. This option provides you with all IndustReal
-   data, but requires some further processing if you want the representation learning framework 
-   to function out-of-the-box.
-1. Create train/val/test directories with an images directory and labels.json file, where all
-   train/val/test images are present. Provide unique names to the images and use the original
-   bounding box detections to create a new labels.json, containing these new names. If desired,
-   you can modify the dataloaders yourself to circumvent this step.
+Please note that the error category above correspond directly to Fig. 7, but their roman numerical 
+does not refer to the integer provided in "error_cat". Hence it is important to follow the definition for 
+provided above.
 
-Please note that we are working on a script to provide that automatically performs this step, to make
-it easier to get starting with the repo.
+To start training and testing with the data, simply unzip and point to the directories in the 
+provided .sh scripts
 
 
 ## Set-up:
 
-0. Install the public [IndustReal dataset](https://timschoonbeek.github.io/industreal) following
+0. (optional if the .zips we provide are used) Install the public
+   [IndustReal dataset](https://timschoonbeek.github.io/industreal) following
    the instructions and directory structure provided
-0. Install required packages: pip install -r requirements.txt
-1. To use pre-trained weights, download safetensors files from HuggingFace 
+2. Install required packages: pip install -r requirements.txt
+3. To use pre-trained weights, download safetensors files from HuggingFace 
    and place them in ./models dir. The results reported in the paper use the weights 
    "resnet34.a1_in1k" and "vit_small_patch16_224.augreg_in21k_ft_in1k"
-2. Optional: use error_labels.json (the new labels published together with the manuscript) to
+4. Optional: use error_labels.json (the new labels published together with the manuscript) to
    create the IndustReal error images subset. The image names contain all required information:
    the IndustReal recording and frame name of each image, the error category, the user-intended 
    state, the bounding box, and whether the assembly state is not occluded (indicated with binary
