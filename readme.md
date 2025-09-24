@@ -29,18 +29,31 @@ Steps and code to reproduce the work "Supervised Representation Learning Approac
 ## Data set-up
 The easiest method to set up the data correctly is to download all files from the data repository
 connected to the publication. You can find this on the [project page](https://timschoonbeek.github.io/state_rec)
-or directly at the [host](https://doi.org/10.4121/611adbc7-7935-43a6-8c3f-b2260a508e73).
-To use the data, simply unpack the two .zip files. The file assembly_states.zip contains all correct
-and intermediate (undefined) assembly states, including the state labels, unless undefined. 
-The assembly_states_errors.zip file contains the assembly state images containing errors, and 
-a file containing the annotations. Specifically, the annotations are in .json format, and for both
-.zip files they contain:
-- "images": all image names,
-- "labels": the assembly state labels as defined in IndustReal,
-- "bbox": bounding box coordinates as defined in IndustReal,
-- "split": indicates which dataset split (train/val/test) the image originates from,
+which hosts the most up-to-date data links.
+To use the data, unpack all of the tar files into a new directory, such that:
+```
+data/
+├── anchors/
+│   ├── images/
+│   └── labels.json
+├── assembly_state_errors/
+│   ├── images/
+│   └── labels.json
+├── synth/
+│   ├── images/
+│   └── labels.json
+├── train/
+│   ├── images/
+│   └── labels.json
+├── test/
+│   ├── images/
+│   └── labels.json
+└── val/
+    ├── images/
+    └── labels.json
+```
 
-Additionally, the annotations in assembly_states_errors.zip contain our new labels:
+Additionally, the annotations in assembly_states_errors contain our new labels:
 - "clean": a Boolean indicating whether the frame demonstrates the entire assembly state,
 - "intended": the user-inteded assembly state (without the errors) as defined in IndustReal,
 - "error_cat": the error category as defined in our paper. Importantly, we define: 1. Missing
@@ -78,3 +91,4 @@ provided .sh scripts
    generalization set
 2. Run test_errors.py to evaluate the performance on the new IndustReal errors subset.
 3. Optional: train.sh provides code to perform steps 0-2 for 5 different seeds 
+
