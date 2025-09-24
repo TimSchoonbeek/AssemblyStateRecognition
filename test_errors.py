@@ -14,7 +14,7 @@ from torch.utils.data import DataLoader
 def save_embeddings(test_name, model, data_path, img_size, save_dir):
     print(f"Loading embeddings from {data_path}")
     if test_name == "sim2real":
-        dataset = RealContrastiveDatasetWithInters(data_path.parent.parent / "industreal_cont" / "train", w=img_size[0], h=img_size[1], skip_factor=50, only_clean=True)
+        dataset = RealContrastiveDatasetWithInters(data_path / "train", w=img_size[0], h=img_size[1], skip_factor=50, only_clean=True)
         emb_path = save_dir / "embeddings.csv"
         lab_path = save_dir / "labels.csv"
         data_loader = DataLoader(dataset, batch_size=32, shuffle=False, num_workers=8, drop_last=True)
@@ -165,5 +165,6 @@ if __name__ == "__main__":
         file = open(run_path / 'test_log.txt', 'a')
         file.write(log_str)
         file.close()
+
 
 
