@@ -6,7 +6,6 @@
 
 DATAPATH="path/to/train/data"
 RUNPATH="path/to/directory/to/save"
-TESTDATAPATH="path/to/test/data"
 
 #the seeds used in the manuscript
 SEEDS=(123 1234 12345 2345 345)
@@ -39,6 +38,6 @@ do
   RUN_DIR="${RUNPATH}/${FOLD_NAME}"
   python test.py $RUN_DIR --checkpoint best.pth --data_path $DATAPATH --h 224 --w 224
   wait
-  python test_errors.py $RUN_DIR --checkpoint best.pth --data_path $TESTDATAPATH --img_h 224 --img_w 224
+  python test_errors.py $RUN_DIR --checkpoint best.pth --data_path $DATAPATH --img_h 224 --img_w 224
   wait
 done
